@@ -1,1 +1,15 @@
-mail:
+place: 1
+place_text: 'Place order [commerce_order:order_number] '
+place_theme: mail_order_receipt
+place_mail:
+  admin: admin
+  user: user
+
+cancel: 1
+cancel_text: 'Cancel order [commerce_order:order_number] '
+cancel_theme: cancel_order_receipt
+cancel_mail:
+  admin: 0
+  user: user
+
+email:

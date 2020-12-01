@@ -1,5 +1,13 @@
-name: 'mail'
+name: 'Commerce mail'
 type: module
-description: 'My Awesome Module'
+description: 'Письма, в зависимости от статуса заказа'
 core: 8.x
 package: 'Custom'
+dependencies:
+  - commerce:commerce
+  - commerce:commerce_order
+  - commerce:commerce_price
+  - commerce_shipping
+  - swiftmailer
+
+version: '8.x-1.0-dev'

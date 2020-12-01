@@ -1,6 +1,6 @@
 mail.config_form:
-  title: 'ConfigForm'
+  title: 'Commerce email settings'
   route_name: mail.config_form
-  description: 'A description for the menu entry'
+  description: ''
   parent: system.admin_config_system
   weight: 99

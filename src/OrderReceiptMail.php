@@ -2,12 +2,8 @@
 
 namespace Drupal\mail;
 
-use Drupal\commerce\MailHandlerInterface;
 use Drupal\commerce_order\Entity\OrderInterface;
-use Drupal\commerce_order\OrderTotalSummaryInterface;
 use Drupal\commerce_payment\Plugin\Commerce\PaymentGateway\SupportsStoredPaymentMethodsInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 
 class OrderReceiptMail extends \Drupal\commerce_order\Mail\OrderReceiptMail {

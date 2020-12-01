@@ -2,16 +2,14 @@
 
 namespace Drupal\mail\Form;
 
-use Drupal\commerce_order\Entity\OrderType;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+
 
 /**
  * Class ConfigForm.
  */
 class ConfigForm extends ConfigFormBase {
-
 
   /**
    * {@inheritdoc}
@@ -38,44 +36,44 @@ class ConfigForm extends ConfigFormBase {
     $states = \Drupal::service('mail.helper_mail')->getTransitions();
 
     foreach ($states as $key => $state) {
-      $form[$key] = array(
+      $states = [
+        'visible' => [
+          ':input[name=' . $key . ']' => ['checked' => TRUE],
+        ],
+      ];
+      $form[$key] = [
         '#type' => 'fieldset',
         '#title' => $this->t($state['label']),
-      );
+      ];
       $form[$key][$key] = [
         '#type' => 'checkbox',
-        '#title' => '<b>'.t($state['label']).'</b>',
-        '#default_value' => $config->get($key)?$config->get($key):FALSE,
+        '#title' => '<b>' . t($state['label']) . '</b>',
+        '#default_value' => $config->get($key) ? $config->get($key) : FALSE,
       ];
-      $form[$key][$key.'_text'] = [
+      $form[$key][$key . '_text'] = [
         '#type' => 'textfield',
-        '#title' => 'text '. t($state['label']),
-        '#states' => array(
-          'visible' => array(
-            ':input[name='.$key.']' => array('checked' => TRUE),
-          ),
-        ),
-        '#default_value' => $config->get($key.'_text'),
+        '#title' => 'text ' . t($state['label']),
+        '#states' => $states,
+        '#default_value' => $config->get($key . '_text'),
       ];
-      $form[$key][$key.'_mail'] = [
+      $form[$key][$key . '_mail'] = [
         '#type' => 'checkboxes',
         '#title' => 'Отправлять письмо',
-        '#options' => array('admin' => $this->t('admin'), 'user' => $this->t('user')),
-        '#states' => array(
-          'visible' => array(
-            ':input[name='.$key.']' => array('checked' => TRUE),
-          ),
-        ),
-        '#default_value' => $config->get($key.'_mail'),
+        '#options' => [
+          'admin' => $this->t('admin'),
+          'user' => $this->t('user'),
+        ],
+        '#states' => $states,
+        '#default_value' => $config->get($key . '_mail'),
       ];
     }
 
 
-    $form['email'] = array(
+    $form['email'] = [
       '#type' => 'textfield',
       '#title' => t('Email'),
       '#default_value' => $config->get('email'),
-    );
+    ];
 
     $form['token_help'] = [
       '#theme' => 'token_tree_link',
