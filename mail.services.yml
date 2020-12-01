@@ -1,0 +1,17 @@
+services:
+  mail.order_fulfillment_subscriber:
+    class: Drupal\mail\EventSubscriber\OrderFulfillmentSubscriber
+    arguments:
+      - '@plugin.manager.mail'
+    tags:
+      - { name: event_subscriber }
+  mail.order_receipt_mail:
+    class: Drupal\mail\OrderReceiptMail
+    arguments: ['@entity_type.manager',
+                '@commerce.mail_handler',
+                '@commerce_order.order_total_summary']
+
+  mail.helper_mail:
+    class: Drupal\mail\HelperMail
+    arguments:
+      - '@plugin.manager.workflow'

@@ -1,0 +1,33 @@
+mail_fulfillment_validation:
+  id: order_fulfillment_validation
+  group: commerce_order
+  label: 'Validate admin'
+  states:
+    draft:
+      label: Draft
+    validation:
+      label: Validation
+    fulfillment:
+      label: Fulfillment
+    completed:
+      label: Completed
+    canceled:
+      label: Canceled
+  transitions:
+    place:
+      label: 'Place order'
+      from: [draft, fulfillment]
+      to:   validation
+    validate:
+      label: 'Validate order'
+      from: [validation]
+      to:   fulfillment
+    fulfill:
+      label: 'Fulfill order'
+      from: [fulfillment]
+      to: completed
+    cancel:
+      label: 'Cancel order'
+      from: [draft, validation, fulfillment]
+      to:   canceled
+

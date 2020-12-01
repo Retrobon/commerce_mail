@@ -1,0 +1,360 @@
+<style>
+  *:before *:after {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    padding: 0;
+    margin: 0;
+    color: #1A1919;
+    font-size: 18px;
+    min-height: 866px;
+    max-height: 866px;
+    min-width: 834px;
+    max-width: 834px;
+  }
+
+  .main-container {
+    margin: 0;
+    text-align: center;
+    background-color: #EFEFEE;
+    padding: 0.1em 0.1em;
+  }
+
+  .logo {
+    letter-spacing: 0.17em;
+    color: #1A1919;
+  }
+
+  .order-container {
+    background-color: white;
+    padding: 1em 1em 0 1em;
+    margin: 1em;
+  }
+
+  p {
+    font-weight: 100;
+
+  }
+
+  td, th {
+    font-size: 1em;
+    font-weight: 100;
+
+    letter-spacing: 0.05em;
+  }
+
+  .second-heading {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .details {
+    margin: -1em 3em 0 3em;
+    padding-bottom: 1em;
+  }
+
+  .table-container {
+    margin: 0em 2em 0 2em;
+  }
+
+  .order-recap {
+    border-top: 0.01em solid #1B1A1A;
+    font-weight: 700;
+    padding: 1em 1em;
+    text-align: left;
+    text-transform: uppercase;
+    width: 100%;
+  }
+
+  .order-recap-row {
+    margin: 1em;
+  }
+
+  .table-h {
+    padding: 0.2em;
+    font-weight: 700;
+  }
+
+  .table-data {
+    font-weight: 100;
+    text-align: left;
+    width: 40%;
+  }
+
+  table.order-details {
+    border-collapse: collapse;
+    padding: 0em 1em;
+    text-align: left;
+    text-transform: initial;
+    width: 100%;
+  }
+  tr.item {
+    height: 20px;
+  }
+  .details-h {
+    border-top: 0.01em solid #1B1A1A;
+    border-bottom: 0.01em solid #1B1A1A;
+    font-weight: 100;
+    padding-left: 0.8em;
+  }
+
+  .details-h-one {
+    padding-left: 1.5em;
+  }
+
+  th:nth-child(2) {
+    padding-left: 1.9em;
+  }
+
+  .model {
+    padding-left: 1.5em;
+  }
+
+  .quantities {
+    padding-right: 1em;
+  }
+
+  tr.row {
+    border-bottom: 0.01em solid #C3C4C3;
+    height: 90px;
+  }
+
+  td.sold-item-values {
+    padding-left: 1.3em;
+  }
+
+  td.sold-item-quantity {
+    padding-left: 2.5em;
+  }
+
+  td.sold-item-price {
+    padding-left: 2em;
+  }
+
+  .product-number {
+    color: #8A8B8A;
+    font-weight: 100;
+  }
+
+  .payment-container {
+    margin: 0em 2em 0 2em;
+  }
+
+  .payment-recap {
+    float: left;
+    margin-top: 0.8em;
+  }
+
+  .col-1 {
+    text-align: left;
+    margin-left: 62%;
+    font-size: 1em;
+  }
+
+  .col-2 {
+    text-align: right;
+    margin-left: 10%;
+  }
+
+  .payment-p {
+    margin: 0.5em 0;
+    letter-spacing: 0.08em;
+  }
+
+  .total {
+  }
+
+  .delivery-container {
+    margin: 0em 2em 0 2em;
+    border-top: 0.01em solid #1B1A1A;
+    border-bottom: 0.01em solid #1B1A1A;
+    padding-bottom: 1em;
+  }
+
+  .delivery-col-left {
+    float: left;
+    text-align: left;
+    width: 43%;
+    margin-left: 1em;
+  }
+
+  .delivery-heading {
+    font-weight: 500;
+  }
+
+  .invoice-col-right {
+    float: left;
+    text-align: left;
+    width: 43%;
+    margin-left: 10%;
+  }
+
+  .extra-actions-container {
+    margin: 0em 2em 0em 2em;
+    padding-bottom: 0.5em;
+  }
+
+  .order-state {
+    font-size: 14px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    padding: 0.4em 11em;
+  }
+
+  .download-order {
+    font-weight: 400;
+    font-size: 14px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    padding: 0.4em 13.45em;
+  }
+
+  .social-links-container {
+    padding: 1em;
+    margin-top: -2em;
+  }
+  .social-logo {
+    height: 2em;
+    padding: 1em 0.3em;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .clear {
+    clear: both;
+  }
+</style>
+
+<div class="main-container">
+  <a href="{{ url('<front>') }}">
+    <h2 class="logo">{{ order_entity.getStore.label }}</h2>
+  </a>
+  <div class="order-container">
+    {% block header %}
+      <h2 class="second-heading"> Спасибо за ваш заказ </h2>
+      <p class="details"> {{ 'Order #@number details:'|t({'@number': order_entity.getOrderNumber}) }} </p>
+    {% endblock %}
+
+    {% block detales %}
+      <div class="table-container">
+        <table class="order-recap">
+          <tr class="order-recap-row">
+            <td class="table-h"> {{ 'Order'|t }} </td>
+            <td class="table-data"> {{ order_entity.getOrderNumber }} </td>
+          </tr>
+          <tr class="order-recap-row">
+            <td class="table-h"> {{ 'Date'|t }} </td>
+            <td class="table-data"> {date}</td>
+          </tr>
+          <tr class="order-recap-row">
+            <td class="table-h"> {{ 'Payment method'|t }} </td>
+            <td class="table-data"> {{ payment_method }} </td>
+          </tr>
+        </table>
+      </div>
+    {% endblock %}
+
+    {% block products %}
+      <div class="table-container">
+        <table class="order-details">
+          <tr class="item">
+            <th class="details-h model"></th>
+            <th class="details-h"> Название</th>
+            <th class="details-h quantities"> Кол-во</th>
+            <th class="details-h"> Цена</th>
+            <th class="details-h details-h-one"> Всего</th>
+          </tr>
+
+          {% for order_item in order_entity.getItems %}
+            <tr class="row">
+              <td class="sold-item-values"><img
+                  src="{{ order_item.purchased_entity.entity.getProduct().field_images.0.entity.uri.value | image_style('thumbnail') }}"
+                  alt=""></td>
+              <td class="sold-item-values"> {{ order_item.label }} <br>
+                <span class="product-number"> {{ order_item.purchased_entity.entity.sku.getString() }} </span>
+              </td>
+              <td class="sold-item-values sold-item-quantity"> {{ order_item.getQuantity|number_format }} </td>
+              <td class="sold-item-values sold-item-price"> {{ order_item.getUnitPrice|commerce_price_format }} </td>
+              <td class="sold-item-values"> {{ order_item.getTotalPrice|commerce_price_format }} </td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    {% endblock %}
+
+    {% block info %}
+      <div class="payment-container">
+        <div class="payment-recap col-1">
+          <p class="payment-p"> {{ 'Subtotal:'|t }} </p>
+          {% for adjustment in totals.adjustments %}
+            <p class="payment-p">{{ adjustment.label }}:</p>
+          {% endfor %}
+          <p class="payment-p"> {{ 'Total:'|t }} </p>
+        </div>
+        <div class="payment-recap col-2">
+          <p class="payment-p">  {{ totals.subtotal|commerce_price_format }} </p>
+          {% for adjustment in totals.adjustments %}
+            <p class="payment-p">{{ adjustment.total|commerce_price_format }}</p>
+          {% endfor %}
+          <p class="payment-p total"> {{ order_entity.getTotalPrice|commerce_price_format }} </p>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="delivery-container">
+        <div class="delivery-col-left">
+          {% if shipping_information %}
+            <h4 class="delivery-heading"> {{ 'Shipping Information'|t }} </h4>
+            <p class="delivery-p">{{ shipping_information }}</p>
+          {% endif %}
+        </div>
+        <div class="invoice-col-right">
+          {% if billing_information %}
+            <h4 class="delivery-heading"> {{ 'Billing Information'|t }} </h4>
+            <p class="delivery-p">{{ billing_information }}</p>
+          {% endif %}
+          {% if payment_method %}
+            <h4 class="delivery-heading"> {{ 'Payment Method'|t }} </h4>
+            <p class="delivery-p">{{ payment_method }}</p>
+          {% endif %}
+        </div>
+        <div class="clear"></div>
+      </div>
+    {% endblock %}
+
+    {% block extra %}
+      <div class="extra-actions-container">
+        <p> Если вы хотите отслеживать свой заказ, вы можете получить доступ к <br>
+          в свою учетную запись клиента, нажав здесь. </p>
+        <a href="#" class="order-state">
+          СТАТУС ВАШЕГО ЗАКАЗА >
+        </a>
+        <p> Вы также можете скачать все детали своего заказа <br>
+          нажав здесь. </p>
+        <a href="#" class="download-order">
+          Скачать >
+        </a>
+      </div>
+
+    {% endblock %}
+  </div>
+  {% block footer %}
+    <div class="social-links-container">
+      <a href="https://www.instagram.com/" class="instagram-logo-link">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/132px-Instagram_logo_2016.svg.png"
+          class="social-logo"/>
+      </a>
+      <a href="https://www.facebook.com/" class="facebook-logo-link">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/600px-Facebook_Logo_%282019%29.png"
+          class="social-logo"/>
+      </a>
+    </div>
+  {% endblock %}
+</div>
+

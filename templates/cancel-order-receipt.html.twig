@@ -1,0 +1,53 @@
+{#
+/**
+ * @file
+ * Template for the order receipt.
+ *
+ * Available variables:
+ * - order_entity: The order entity.
+ * - billing_information: The billing information.
+ * - shipping_information: The shipping information.
+ * - payment_method: The payment method.
+ * - totals: An array of order totals values with the following keys:
+ *   - subtotal: The order subtotal price.
+ *   - adjustments: An array of adjustment totals:
+ *     - type: The adjustment type.
+ *     - label: The adjustment label.
+ *     - total: The adjustment total price.
+ *     - weight: The adjustment weight, taken from the adjustment type.
+ *   - total: The order total price.
+ *
+ * @ingroup themeable
+ */
+#}
+{% extends 'modules/custom/mail/templates/mail_template.html.twig' %}
+
+    {% block header %}
+      <h2 class="second-heading"> Ваш заказ #{{ order_entity.getOrderNumber }} отменен</h2>
+    {% endblock %}
+
+    {% block products %}
+    {% endblock %}
+
+    {% block info %}
+    {% endblock %}
+
+    {% block extra %}
+    {% endblock %}
+
+  {% block footer %}
+    <div class="social-links-container">
+      <a href="https://www.instagram.com/" class="instagram-logo-link">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/132px-Instagram_logo_2016.svg.png"
+          class="social-logo"/>
+      </a>
+      <a href="https://www.facebook.com/" class="facebook-logo-link">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/600px-Facebook_Logo_%282019%29.png"
+          class="social-logo"/>
+      </a>
+    </div>
+  {% endblock %}
+
+

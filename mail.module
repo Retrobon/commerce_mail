@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @return \null[][][]
+ */
+function mail_theme() {
+  return [
+    'mail_order_receipt' => [
+      'variables' => [
+        'order_entity' => NULL,
+        'billing_information' => NULL,
+        'shipping_information' => NULL,
+        'payment_method' => NULL,
+        'totals' => NULL,
+      ],
+    ],
+    'cancel_order_receipt' => [
+      'variables' => [
+        'order_entity' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function mail_form_config_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  foreach (array_keys(mail_theme()) as $option) {
+    $options[$option] = $option;
+  }
+
+  if (!empty($options)) {
+    $config = \Drupal::config('mail.config');
+    $transitions = array_keys(\Drupal::service('mail.helper_mail')
+      ->getTransitions());
+    foreach ($transitions as $transition) {
+      $form[$transition][$transition . '_theme'] = [
+        '#type' => 'select',
+        '#title' => t('Template for mail ' . $transition),
+        '#options' => $options,
+        '#default_value' => $config->get($transition . '_theme') ? $config->get($transition . '_theme') : FALSE,
+      ];
+    }
+  }
+
+}
